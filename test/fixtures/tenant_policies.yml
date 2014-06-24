@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ldap_self_request: 
+  db_self_request: 
+  account_request_approval_required: 
+  account_request_activation_required: 
+  reset_password_on_first_login: 
+
+two:
+  ldap_self_request: 
+  db_self_request: 
+  account_request_approval_required: 
+  account_request_activation_required: 
+  reset_password_on_first_login: 

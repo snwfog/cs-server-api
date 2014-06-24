@@ -1,0 +1,2 @@
+class ServiceAccountsController < ApplicationController
+end

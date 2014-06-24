@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lineage: MyString
+  name: MyString
+  hash_algorithm_name: MyString
+  hash_iteration: 1
+  entry_point: MyString
+  image: MyString
+  db_authentication: 
+  ldap_authentication: 
+
+two:
+  lineage: MyString
+  name: MyString
+  hash_algorithm_name: MyString
+  hash_iteration: 1
+  entry_point: MyString
+  image: MyString
+  db_authentication: 
+  ldap_authentication: 

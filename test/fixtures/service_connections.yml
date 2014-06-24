@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  creation_date: MyString
+  type: 
+  category: MyString
+  service_connection_parameter: MyText
+  last_usage_record: 2014-06-23 20:05:15
+  status_checked: 
+  usage_enabled: 
+  metrics_enabled: 
+
+two:
+  name: MyString
+  creation_date: MyString
+  type: 
+  category: MyString
+  service_connection_parameter: MyText
+  last_usage_record: 2014-06-23 20:05:15
+  status_checked: 
+  usage_enabled: 
+  metrics_enabled: 
