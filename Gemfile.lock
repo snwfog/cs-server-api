@@ -5,6 +5,13 @@ GIT
     rolify (3.4.0)
 
 GIT
+  remote: git://github.com/joelmoss/bitmask_attributes.git
+  revision: d7df46110976f8cfb383955e30b6abb5e71246c3
+  specs:
+    bitmask_attributes (1.0.0)
+      activerecord (>= 3.1)
+
+GIT
   remote: git://github.com/rails-api/active_model_serializers.git
   revision: 2e31a141252a37f75cb5dc10e96d3975f1046085
   specs:
@@ -159,6 +166,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers!
+  bitmask_attributes!
   cloudstack_client!
   jazz_hands!
   rails (= 4.1.1)

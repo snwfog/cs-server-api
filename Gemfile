@@ -16,6 +16,9 @@ gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 
 gem 'rolify', github: 'EppO/rolify'
 
+gem 'bitmask_attributes', github: 'joelmoss/bitmask_attributes'
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
