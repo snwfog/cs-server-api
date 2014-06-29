@@ -6,18 +6,17 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-gem 'sqlite3'
+gem 'mysql2'
+
+gem 'active_model_serializers'
+gem 'cancan'
+gem 'bitmask_attributes'
+gem 'stormpath-sdk'
+gem 'devise'
 
 gem 'jazz_hands', git: "https://github.com/nixme/jazz_hands", branch: "bring-your-own-debugger"
 
 gem 'cloudstack_client', git: "https://github.com/niwo/cloudstack_client"
-
-gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
-
-gem 'rolify', github: 'EppO/rolify'
-
-gem 'bitmask_attributes', github: 'joelmoss/bitmask_attributes'
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

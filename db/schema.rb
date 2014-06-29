@@ -11,26 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625020917) do
+ActiveRecord::Schema.define(version: 20140626022941) do
 
   create_table "permissions", force: true do |t|
     t.string   "name"
     t.string   "description_key"
-    t.boolean  "system_only"
+    t.boolean  "is_system_only"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "permissions_roles", id: false, force: true do |t|
+    t.integer "role_id",       null: false
+    t.integer "permission_id", null: false
   end
 
   create_table "roles", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.boolean  "used_for_new_account_request"
-    t.boolean  "least_privileged"
-    t.boolean  "most_privileged"
+    t.boolean  "is_used_for_new_account_request"
+    t.boolean  "is_least_privileged"
+    t.boolean  "is_most_privileged"
     t.boolean  "is_default"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tenant_id"
   end
+
+  add_index "roles", ["tenant_id"], name: "index_roles_on_tenant_id", using: :btree
 
   create_table "service_accounts", force: true do |t|
     t.string   "credential_one"
@@ -52,19 +60,19 @@ ActiveRecord::Schema.define(version: 20140625020917) do
     t.string   "category"
     t.text     "service_connection_parameter"
     t.datetime "last_usage_record"
-    t.boolean  "status_checked"
-    t.boolean  "usage_enabled"
-    t.boolean  "metrics_enabled"
+    t.boolean  "is_status_checked"
+    t.boolean  "is_usage_enabled"
+    t.boolean  "is_metrics_enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "tenant_policies", force: true do |t|
-    t.boolean  "ldap_self_request"
-    t.boolean  "db_self_request"
-    t.boolean  "account_request_approval_required"
-    t.boolean  "account_request_activation_required"
-    t.boolean  "reset_password_on_first_login"
+    t.boolean  "is_ldap_self_request"
+    t.boolean  "is_db_self_request"
+    t.boolean  "is_account_request_approval_required"
+    t.boolean  "is_account_request_activation_required"
+    t.boolean  "is_reset_password_on_first_login"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,10 +84,11 @@ ActiveRecord::Schema.define(version: 20140625020917) do
     t.integer  "hash_iteration"
     t.string   "entry_point"
     t.string   "image"
-    t.boolean  "db_authentication"
-    t.boolean  "ldap_authentication"
+    t.boolean  "is_db_authentication"
+    t.boolean  "is_ldap_authentication"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tenant_type"
   end
 
   create_table "users", force: true do |t|
@@ -96,6 +105,21 @@ ActiveRecord::Schema.define(version: 20140625020917) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status"
+    t.string   "approval_token"
+    t.integer  "tenant_id"
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
 
 end
