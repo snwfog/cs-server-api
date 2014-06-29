@@ -1,0 +1,2 @@
+class TenantPoliciesController < ApplicationController
+end

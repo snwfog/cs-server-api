@@ -1,0 +1,2 @@
+class ServiceConnectionsController < ApplicationController
+end
