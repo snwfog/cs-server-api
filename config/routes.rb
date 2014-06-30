@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   resources :permissions, except: [:new, :edit]
   resources :roles, except: [:new, :edit]
   resources :tenant_policies, except: [:new, :edit]

@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  # load_and_authorize_resource
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
     @users = User.all
