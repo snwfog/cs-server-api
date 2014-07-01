@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :permissions, except: [:new, :edit]
-  resources :roles, except: [:new, :edit]
+  resources :roles, shallow: true do
+    resources :permissions
+  end
+
   resources :tenant_policies, except: [:new, :edit]
   resources :tenants, except: [:new, :edit]
   resources :service_connections, except: [:new, :edit]
