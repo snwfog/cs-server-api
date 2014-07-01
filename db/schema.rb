@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701150846) do
+ActiveRecord::Schema.define(version: 20140701190133) do
 
   create_table "permissions", force: true do |t|
     t.string   "name"
@@ -89,7 +89,8 @@ ActiveRecord::Schema.define(version: 20140701150846) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tenant_type"
-    t.integer  "users_count"
+    t.integer  "users_count",            default: 0, null: false
+    t.integer  "roles_count",            default: 0, null: false
   end
 
   create_table "users", force: true do |t|

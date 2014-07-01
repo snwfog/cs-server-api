@@ -21,4 +21,14 @@ class User < ActiveRecord::Base
                          locale: locale, email: email, password: password)
     end
   end
+
+  def permissions
+    roles = Role.where(id: [self.tenant.roles.ids]).includes(:permissions)
+    permissions = roles.inject([]) do |all, role|
+      all.concat role.permissions
+      all
+    end
+
+    permissions.uniq
+  end
 end

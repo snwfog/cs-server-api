@@ -56,6 +56,6 @@ end
 users = User.all
 roles = Role.all
 tenants.each do |tenant|
-  tenant.roles << roles.sample(rand(roles.count))
+  tenant.roles << roles.sample(1 + rand(roles.count))
   tenant.save
 end
