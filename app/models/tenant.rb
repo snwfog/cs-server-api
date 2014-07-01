@@ -3,7 +3,7 @@ class Tenant < ActiveRecord::Base
 
   bitmask :tenant_type, :as => TENANT_TYPE
 
-  has_many :users
+  has_many :users, inverse_of: :tenant
   has_many :roles
   has_many :service_accounts
 end
