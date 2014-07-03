@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701190133) do
+ActiveRecord::Schema.define(version: 20140703005908) do
 
   create_table "permissions", force: true do |t|
     t.string   "name"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140701190133) do
     t.string   "creation_date"
     t.string   "type"
     t.string   "category"
-    t.text     "service_connection_parameter"
+    t.text     "parameter"
     t.datetime "last_usage_record"
     t.boolean  "is_status_checked"
     t.boolean  "is_usage_enabled"
