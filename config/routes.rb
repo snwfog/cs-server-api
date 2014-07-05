@@ -3,11 +3,19 @@ Rails.application.routes.draw do
     resources :permissions
   end
 
-  resources :tenant_policies, except: [:new, :edit]
-  resources :tenants, except: [:new, :edit]
-  resources :service_connections, except: [:new, :edit]
-  resources :service_accounts, except: [:new, :edit]
-  resources :users, except: [:new, :edit]
+  resources :service_connections do
+    resources :tenants, only: [:index, :create, :destroy]
+  end
+
+  resources :tenants do
+    resources :users, except: [:index, :create, :new, :edit]
+    resources :tenant_policies, except: [:index, :new, :edit]
+  end
+
+  # resources :service_connections
+  # resources :tenant_policies
+  # resources :service_accounts
+  # resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
