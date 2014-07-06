@@ -1,16 +1,60 @@
 Rails.application.routes.draw do
-  resources :roles, shallow: true do
-    resources :permissions
+  get 'emails/verify'
+
+  get 'passwords/update'
+
+  get 'passwords/forgot'
+
+  get 'passwords/reset'
+
+  get 'preferences/index'
+
+  get 'preferences/show'
+
+  get 'preferences/create'
+
+  resources :users do
+    match 'organization' => :organization, via: :get, on: :member # SKETCHY
+    match 'selfreg' => :selfreg, via: :post, on: :member, as: :self_register
+    member do
+      get 'api' => :api, as: :available_api_of
+      scope :preferences, controller: :preferences do
+        get '' => :index
+        get ':key' => :show
+        post ':key/:value' => :create
+      end
+
+      scope :password, controller: :password do
+        post '' => :update, as: :update_password
+        post 'forgot' => :forgot, as: :forgot_password
+        post 'reset' => :reset, as: :reset_password
+      end
+
+      scope :email, controller: :email do
+        get 'verify' => :verify, as: :verify_email
+      end
+    end
   end
 
-  resources :service_connections do
-    resources :tenants, only: [:index, :create, :destroy]
-  end
+  # resources :roles do
+  #   resources :permissions, shallow: true do
+  #     # match '/see', on: :collection, via: :get
+  #   end
+  #
+  # end
 
-  resources :tenants do
-    resources :users, except: [:index, :create, :new, :edit]
-    resources :tenant_policies, except: [:index, :new, :edit]
-  end
+  # resources :roles, shallow: true do
+  #   resources :permissions
+  # end
+
+  # resources :service_connections do
+  #   resources :tenants, only: [:index, :create, :destroy]
+  # end
+
+  # resources :tenants do
+  #   resources :users, except: [:index, :create, :new, :edit]
+  #   resources :tenant_policies, except: [:index, :new, :edit]
+  # end
 
   # resources :service_connections
   # resources :tenant_policies
