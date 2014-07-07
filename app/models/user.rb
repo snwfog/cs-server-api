@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  authenticates_with_sorcery!
+
   # constants, relation, scope, validation, rest...
 
   STATUS = %i(pending_approval pending_activation active disabled locked)
@@ -10,7 +12,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :email
 
   bitmask :status, :as => STATUS
-  serialize :user_preferences, Hash
+  store :user_preferences
 
   class << self
     def fake

@@ -13,3 +13,6 @@ gem 'stormpath-sdk'
 gem 'jazz_hands', git: "https://github.com/nixme/jazz_hands", branch: "bring-your-own-debugger"
 gem 'cloudstack_client', git: "https://github.com/niwo/cloudstack_client"
 gem 'faker'
+
+gem 'sorcery'
+gem 'mailgunner'

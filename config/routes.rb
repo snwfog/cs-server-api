@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     end
   end
 
+  match '*path', controller: :application, action: :routing_error, via: :all
+
   # resources :roles do
   #   resources :permissions, shallow: true do
   #     # match '/see', on: :collection, via: :get

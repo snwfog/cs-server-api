@@ -1,16 +1,22 @@
 class ApplicationController < ActionController::Base
   respond_to :json
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found_exception
-  rescue_from ActionController::ParameterMissing, with: :missing_params_exception
+  rescue_from ActionController::RoutingError, with: :render_not_found_exception
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_exception
+  rescue_from ActionController::ParameterMissing, with: :render_missing_params_exception
+
+  def routing_error
+    logger.info "Path #{params[:path]} is not a valid path."
+    raise ActionController::RoutingError.new(params[:path])
+  end
 
   protected
 
-  def not_found_exception
+  def render_not_found_exception
     render nothing: true, status: :not_found
   end
 
-  def missing_params_exception(exception)
+  def render_missing_params_exception(exception)
     render json: exception, status: :bad_request
   end
 
