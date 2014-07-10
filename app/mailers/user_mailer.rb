@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
   def activation_needed_email(user)
     @user = user
     mail subject: "Activation required",
-         to:      "donchoa.developer@gmail.com",
+         to:      "donchoa.developer@gmail.com"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

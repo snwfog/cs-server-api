@@ -15,4 +15,4 @@ gem 'cloudstack_client', git: "https://github.com/niwo/cloudstack_client"
 gem 'faker'
 
 gem 'sorcery'
-gem 'mailgunner'
+gem 'mailgun'
