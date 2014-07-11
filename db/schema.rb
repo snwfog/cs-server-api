@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706045154) do
+ActiveRecord::Schema.define(version: 20140711010756) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20140706045154) do
     t.string   "username"
     t.string   "locale"
     t.string   "email"
-    t.string   "password"
     t.string   "salt"
     t.string   "hash_algorithm_name"
     t.integer  "hash_iteration"
@@ -118,7 +117,6 @@ ActiveRecord::Schema.define(version: 20140706045154) do
     t.string   "approval_token"
     t.integer  "tenant_id"
     t.text     "preferences"
-    t.string   "crypted_password",                null: false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "reset_password_token"
@@ -131,6 +129,7 @@ ActiveRecord::Schema.define(version: 20140706045154) do
     t.datetime "last_logout_at"
     t.datetime "last_activity_at"
     t.string   "last_login_from_ip_address"
+    t.string   "crypted_password",                null: false
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree

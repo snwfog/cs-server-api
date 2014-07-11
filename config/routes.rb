@@ -1,23 +1,22 @@
 Rails.application.routes.draw do
-  get 'emails/verify'
-
-  get 'passwords/update'
-
-  get 'passwords/forgot'
-
-  get 'passwords/reset'
-
-  get 'preferences/index'
-
-  get 'preferences/show'
-
-  get 'preferences/create'
+  # Deprecated routes
+  # get 'emails/verify'
+  # get 'passwords/update'
+  # get 'passwords/forgot'
+  # get 'passwords/reset'
+  # get 'preferences/index'
+  # get 'preferences/show'
+  # get 'preferences/create'
 
   resources :users do
     match 'organization' => :organization, via: :get, on: :member # SKETCHY
     match 'selfreg' => :selfreg, via: :post, on: :member, as: :self_register
     member do
-      get 'api' => :api, as: :available_api_of
+      # Get user API credentials for service accounts
+      get 'api', as: :available_api_of
+      # Activate user
+      get 'activate', as: :activate
+
       scope :preferences, controller: :preferences do
         get '' => :index
         get ':key' => :show
@@ -25,7 +24,7 @@ Rails.application.routes.draw do
       end
 
       scope :password, controller: :password do
-        post '' => :update, as: :update_password
+        post 'update' => :update, as: :update_password
         post 'forgot' => :forgot, as: :forgot_password
         post 'reset' => :reset, as: :reset_password
       end

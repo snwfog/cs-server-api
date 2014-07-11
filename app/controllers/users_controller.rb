@@ -22,6 +22,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def activate
+    if @user = User.load_from_activation_token(params[:id])
+      @user.activate!
+      logger.warn("#{@user} was successfully activated!") if @user.activated?
+    end
+
+    redirect_to users_path
+  end
+
   private
     def user
       User.find(params[:id])
