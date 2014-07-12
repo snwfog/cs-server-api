@@ -18,11 +18,13 @@ end
 
 10.times do
   User.create do |user|
-    user.first_name = Faker::Name.first_name
-    user.last_name  = Faker::Name.last_name
-    user.user_name  = Faker::Internet.user_name(first_name)
+    user_first_name = Faker::Name.first_name
+    user_last_name = Faker::Name.last_name
+    user.first_name = user_first_name
+    user.last_name  = user_last_name
+    user.username   = Faker::Internet.user_name(user_first_name)
     user.locale     = %w(en fr)[rand(2)]
-    user.email      = Faker::Internet.email(Faker::Internet.user_name("#{first_name} #{last_name}", %w(. _ -)))
+    user.email      = Faker::Internet.email(Faker::Internet.user_name("#{user_first_name} #{user_last_name}", %w(. _ -)))
     user.password   = Faker::Bitcoin.address
   end
 end
