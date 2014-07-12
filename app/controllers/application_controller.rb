@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  before_filter :require_login
+
   respond_to :json
 
   rescue_from ActionController::RoutingError, with: :render_not_found_exception

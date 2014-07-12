@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   # get 'preferences/show'
   # get 'preferences/create'
 
+  post 'login/new' => 'user_sessions#new', as: :new_login
+  post 'login' => 'user_sessions#create', as: :login
+  post 'logout' => 'user_sessions#destroy', as: :logout
+
   resources :users do
     match 'organization' => :organization, via: :get, on: :member # SKETCHY
     match 'selfreg' => :selfreg, via: :post, on: :member, as: :self_register
