@@ -10,21 +10,21 @@
 
 5.times do
   company_name = Faker::Company.name
-  entry_point  = "http://#{company_name.split.sample.downcase}.localhost.com:8080"
+  entry        = company_name.split(/[^\w]/).reject(&:empty?).sample.downcase
+  entry_point  = "http://#{entry}.localhost.com:8080"
   tenant_type  = Tenant::TENANT_TYPE.sample
   Tenant.create(name: company_name, entry_point: entry_point, tenant_type: tenant_type)
 end
 
 10.times do
-  first_name = Faker::Name.first_name
-  last_name  = Faker::Name.last_name
-  user_name  = Faker::Internet.user_name(first_name)
-  locale     = %w(en fr)[rand(2)]
-  email      = Faker::Internet.email(Faker::Internet.user_name("#{first_name} #{last_name}", %w(. _ -)))
-  password   = Faker::Bitcoin.address
-  user = User.create(first_name: first_name, last_name: last_name, username: user_name,
-              locale: locale, email: email, password: password)
-  user.save
+  User.create do |user|
+    user.first_name = Faker::Name.first_name
+    user.last_name  = Faker::Name.last_name
+    user.user_name  = Faker::Internet.user_name(first_name)
+    user.locale     = %w(en fr)[rand(2)]
+    user.email      = Faker::Internet.email(Faker::Internet.user_name("#{first_name} #{last_name}", %w(. _ -)))
+    user.password   = Faker::Bitcoin.address
+  end
 end
 
 tenants = Tenant.all
