@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
 
-  before_filter :require_login
+  acts_as_token_authentication_handler_for User
+
+  # before_filter :require_login
 
   respond_to :json
 

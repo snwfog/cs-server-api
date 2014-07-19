@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711010756) do
+ActiveRecord::Schema.define(version: 20140719000718) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20140711010756) do
     t.string   "last_name"
     t.string   "username"
     t.string   "locale"
-    t.string   "email"
+    t.string   "email",                  default: "", null: false
     t.string   "salt"
     t.string   "hash_algorithm_name"
     t.integer  "hash_iteration"
@@ -117,26 +117,26 @@ ActiveRecord::Schema.define(version: 20140711010756) do
     t.string   "approval_token"
     t.integer  "tenant_id"
     t.text     "preferences"
-    t.string   "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
+    t.string   "authentication_token"
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
-    t.datetime "reset_password_token_expires_at"
-    t.datetime "reset_password_email_sent_at"
-    t.string   "activation_state"
-    t.string   "activation_token"
-    t.datetime "activation_token_expires_at"
-    t.datetime "last_login_at"
-    t.datetime "last_logout_at"
-    t.datetime "last_activity_at"
-    t.string   "last_login_from_ip_address"
-    t.string   "crypted_password",                null: false
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
-  add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at", using: :btree
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["tenant_id"], name: "index_users_on_tenant_id", using: :btree
 
 end

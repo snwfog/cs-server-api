@@ -1,43 +1,37 @@
 Rails.application.routes.draw do
-  # Deprecated routes
-  # get 'emails/verify'
-  # get 'passwords/update'
-  # get 'passwords/forgot'
-  # get 'passwords/reset'
-  # get 'preferences/index'
-  # get 'preferences/show'
-  # get 'preferences/create'
 
-  post 'login/new' => 'user_sessions#new', as: :new_login
-  post 'login' => 'user_sessions#create', as: :login
-  post 'logout' => 'user_sessions#destroy', as: :logout
+  devise_for :users
 
-  resources :users do
-    match 'organization' => :organization, via: :get, on: :member # SKETCHY
-    match 'selfreg' => :selfreg, via: :post, on: :member, as: :self_register
-    member do
-      # Get user API credentials for service accounts
-      get 'api', as: :available_api_of
-      # Activate user
-      get 'activate', as: :activate
+  # post 'login/new' => 'user_sessions#new', as: :new_login
+  # post 'login' => 'user_sessions#create', as: :login
+  # post 'logout' => 'user_sessions#destroy', as: :logout
 
-      scope :preferences, controller: :preferences do
-        get '' => :index
-        get ':key' => :show
-        post ':key/:value' => :create
-      end
-
-      scope :password, controller: :password do
-        post 'update' => :update, as: :update_password
-        post 'forgot' => :forgot, as: :forgot_password
-        post 'reset' => :reset, as: :reset_password
-      end
-
-      scope :email, controller: :email do
-        get 'verify' => :verify, as: :verify_email
-      end
-    end
-  end
+  # resources :users do
+  #   match 'organization' => :organization, via: :get, on: :member # SKETCHY
+  #   match 'selfreg' => :selfreg, via: :post, on: :member, as: :self_register
+  #   member do
+  #     # Get user API credentials for service accounts
+  #     get 'api', as: :available_api_of
+  #     # Activate user
+  #     get 'activate', as: :activate
+  #
+  #     scope :preferences, controller: :preferences do
+  #       get '' => :index
+  #       get ':key' => :show
+  #       post ':key/:value' => :create
+  #     end
+  #
+  #     scope :password, controller: :password do
+  #       post 'update' => :update, as: :update_password
+  #       post 'forgot' => :forgot, as: :forgot_password
+  #       post 'reset' => :reset, as: :reset_password
+  #     end
+  #
+  #     scope :email, controller: :email do
+  #       get 'verify' => :verify, as: :verify_email
+  #     end
+  #   end
+  # end
 
   match '*path', controller: :application, action: :routing_error, via: :all
 

@@ -14,5 +14,7 @@ gem 'jazz_hands', git: "https://github.com/nixme/jazz_hands", branch: "bring-you
 gem 'cloudstack_client', git: "https://github.com/niwo/cloudstack_client"
 gem 'faker'
 
-gem 'sorcery'
+# gem 'sorcery'
 gem 'mailgun'
+gem 'devise'
+gem 'simple_token_authentication'

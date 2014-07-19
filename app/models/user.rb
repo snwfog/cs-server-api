@@ -1,14 +1,15 @@
 class User < ActiveRecord::Base
-  authenticates_with_sorcery!
+  # acts_as_token_authenticatable
 
-  # constants, relation, scope, validation, rest...
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable
 
   STATUS = %i(pending_approval pending_activation active disabled locked)
   belongs_to :tenant, inverse_of: :users, counter_cache: true
   has_many :roles, through: :tenant
   has_many :service_accounts
 
-  validates_presence_of :first_name, :last_name, :username, :locale, :email, :password
+  validates_presence_of :first_name, :last_name, :username, :locale, :email
   validates_uniqueness_of :username, :email
 
   bitmask :status, :as => STATUS
@@ -23,8 +24,13 @@ class User < ActiveRecord::Base
       email = Faker::Internet.email(
           Faker::Internet.user_name("#{first_name} #{last_name}", %w(. _ -)))
       password = Faker::Bitcoin.address
-      User.new(first_name: first_name, last_name: last_name, username: user_name,
-                         locale: locale, email: email, password: password)
+
+      User.new(first_name: first_name,
+               last_name: last_name,
+               username: user_name,
+               locale: locale,
+               email: email,
+               password: password)
     end
   end
 
