@@ -6,4 +6,6 @@ class Tenant < ActiveRecord::Base
   has_many :users, inverse_of: :tenant
   has_many :roles
   has_many :service_accounts
+  has_many :environments
+
 end

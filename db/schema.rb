@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719000718) do
+ActiveRecord::Schema.define(version: 20140726002200) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -20,6 +20,20 @@ ActiveRecord::Schema.define(version: 20140719000718) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "environments", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "tenant_id"
+    t.integer  "service_connection_id"
+    t.integer  "membership"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "users_count",           default: 0, null: false
+  end
+
+  add_index "environments", ["service_connection_id"], name: "index_environments_on_service_connection_id", using: :btree
+  add_index "environments", ["tenant_id"], name: "index_environments_on_tenant_id", using: :btree
 
   create_table "permissions", force: true do |t|
     t.string   "name"

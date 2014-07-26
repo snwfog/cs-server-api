@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       first_name = Faker::Name.first_name
       last_name = Faker::Name.last_name
       user_name = Faker::Internet.user_name(first_name)
-      locale = %w(en fr)[rand(2)]
+      locale = %w(EN FR)[rand(2)]
       email = Faker::Internet.email(
           Faker::Internet.user_name("#{first_name} #{last_name}", %w(. _ -)))
       password = Faker::Bitcoin.address
