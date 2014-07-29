@@ -1,4 +1,6 @@
 class Tenant < ActiveRecord::Base
+  acts_as_nested_set :counter_cache => :children_count
+
   TENANT_TYPE = %i(organization department)
 
   bitmask :tenant_type, :as => TENANT_TYPE

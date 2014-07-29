@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726002200) do
+ActiveRecord::Schema.define(version: 20140726022302) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -113,7 +113,14 @@ ActiveRecord::Schema.define(version: 20140726002200) do
     t.integer  "tenant_type"
     t.integer  "users_count",            default: 0, null: false
     t.integer  "roles_count",            default: 0, null: false
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.integer  "children_count",         default: 0, null: false
   end
+
+  add_index "tenants", ["rgt"], name: "index_tenants_on_rgt", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
