@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  # acts_as_token_authenticatable
+  acts_as_token_authenticatable
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_many :roles, through: :tenant
   has_many :service_accounts
 
-  validates_presence_of :first_name, :last_name, :username, :locale, :email
-  validates_uniqueness_of :username, :email
+  # validates_presence_of :first_name, :last_name, :username, :locale, :email
+  # validates_uniqueness_of :username, :email
 
   bitmask :status, :as => STATUS
   store :user_preferences

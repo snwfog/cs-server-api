@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-
   devise_for :users
+  resources :tenants
+  resources :users
 
   # post 'login/new' => 'user_sessions#new', as: :new_login
   # post 'login' => 'user_sessions#create', as: :login
